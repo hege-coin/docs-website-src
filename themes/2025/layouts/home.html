@@ -1,0 +1,13 @@
+{{ define "main" }}
+<article>
+  <h1>{{ .Title }}</h1>
+  <p class="intro">
+  {{ .Summary }}
+  </p>
+  <ul class="featured-links">
+    <li><a href="/overview/about-hege/">About Hege</a></li>
+    <li><a href="/roadmap/roadmap/">Roadmap</a></li>
+  </ul>
+  {{ .Content }}
+</article>
+{{ end }}

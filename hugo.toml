@@ -1,0 +1,7 @@
+baseURL = 'https://hege-coin.github.io/docs-website/'
+languageCode = 'en-us'
+title = 'Hegecoin docs'
+theme = '2025'
+disableHugoGeneratorInject = true
+
+[taxonomies]

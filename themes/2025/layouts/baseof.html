@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  {{ if .IsHome }}
+    <title>{{ site.Title }}</title>
+  {{ else }}
+    <title>{{ .Title }} | {{ site.Title }}</title>
+  {{ end }}
+  <meta name="author" content="Hege">
+  <meta name="description" content="{{ replace .Summary " \n" " " }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="alternate" type="application/rss+xml" href="{{ .Site.BaseURL }}index.xml" title="Hege Documentation">
+  <link rel="sitemap" type="application/xml" href="{{ .Site.BaseURL }}sitemap.xml">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ relURL "apple-touch-icon.png" }} ">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ relURL "favicon.png" }}">
+  <link rel="canonical" href="{{ .Permalink }}">
+  {{ range .Site.Sections}}
+    <link rel="prefetch" href="{{ .RelPermalink }}">
+    {{ range .Pages }}
+      <link rel="prefetch" href="{{ .RelPermalink }}">
+    {{ end }}
+  {{ end }}
+  {{ with resources.Get "css/style.css" }}
+    {{ with . }}
+      <style>{{ .Content | safeCSS }}</style>
+    {{ end }}
+  {{ end }}
+  <script>
+    const colorMeta = document.querySelector('meta[name="color-scheme"]');
+    function setColorMode(mode) {
+      colorMeta.setAttribute('content', mode);
+      localStorage.setItem('mode', mode);
+    }
+    addEventListener("DOMContentLoaded", function () {
+      if (mode = localStorage.getItem('mode')) {
+        document.getElementById('color-mode').value = mode
+        setColorMode(mode); // The above won't trigger change event, so need this
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <header>
+    <a href="{{ relURL "" }}" class="logo" title="To front page">
+      <img src="{{ relURL "images/hege-logo.svg" }}" width="120" 
+        alt="HEGE logo, printed in capital, yellow block letters with black outlines." />
+    </a>
+    <div>
+      <label for="color-mode">Color</label>
+      <select id="color-mode" onchange="setColorMode(this.value)">
+        <option value="light dark">Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+    </div>
+  </header>
+  <div class="nav-toggle">
+    <label for="toggle-input-1">
+      <svg xmlns="http://www.w3.org/2000/svg" height="14" viewBox="0 -960 960 960" width="14" fill="currentColor">
+        <path
+          d="M579-480 285-774q-15-15-14.5-35.5T286-845q15-15 35.5-15t35.5 15l307 308q12 12 18 27t6 30q0 15-6 30t-18 27L356-115q-15 15-35 14.5T286-116q-15-15-15-35.5t15-35.5l293-293Z" />
+      </svg>
+      Menu</label>
+    <input type="checkbox" id="toggle-input-1" class="visually-hidden" aria-label="Expand or collapse main menu">
+  </div>
+  <nav>
+    <div class="nav-content">
+      {{ range .Site.Sections.ByWeight }}
+      <h3>
+        {{ if eq .RelPermalink $.Page.RelPermalink }}
+        <a class="current" href="{{ .RelPermalink }}">
+          {{ else }}
+          <a href="{{ .RelPermalink }}">
+            {{ end }}
+            <span><img src="{{ relURL .Params.icon_url }}" width="14" 
+                alt="Icon for section {{ .LinkTitle }}" /></span>
+            {{ .LinkTitle }}
+          </a>
+      </h3>
+      <ul>
+        {{ range .Pages.ByWeight }}
+        <li>
+          {{ if eq .RelPermalink $.Page.RelPermalink }}
+          <a class="current" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+          {{ else }}
+          <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+          {{ end }}
+        </li>
+        {{ end }}
+      </ul>
+      {{ end }}
+      <ul class="links">
+        <li>
+          <a href="https://www.hegecoin.com">
+            <span><img src="{{ relURL "images/hege-icon.svg" }}" width="14" alt="Hege icon" /></span>
+            Website
+          </a>
+        </li>
+        <li>
+          <a href="https://t.me/Hegequarters">
+            <span><img src="{{ relURL "images/telegram-icon.svg" }}" width="14" alt="Telegram logo" /></span>
+            Telegram
+          </a>
+        </li>
+        <li>
+          <a href="https://x.com/HegeCoin/">
+            <span><img src="{{ relURL "images/x-icon.svg" }}" width="14" alt="X logo" /></span>
+            X
+          </a>
+        </li>
+        <li>
+          <a href="https://www.reddit.com/r/HegeCoin/">
+            <span><img src="{{ relURL "images/reddit-icon.svg" }}" width="14" alt="Reddit logo" /></span>
+            Reddit
+          </a>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/@HegeCoin">
+            <span><img src="{{ relURL "images/youtube-icon.png" }}" width="14" alt="YouTube logo" /></span>
+            YouTube
+          </a>
+        </li>
+        <li>
+          <a href="https://www.tiktok.com/@hegecoinsol">
+            <span><img src="{{ relURL "images/tiktok-icon.svg" }}" width="14" alt="TikTok logo" /></span>
+            TikTok
+          </a>
+        </li>
+        <li>
+          <a href="https://www.instagram.com/hege.coin">
+            <span><img src="{{ relURL "images/instagram-icon.svg" }}" width="14" alt="Instagram logo" /></span>
+            Instagram
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
+</body>
+
+</html>

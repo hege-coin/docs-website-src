@@ -1,0 +1,26 @@
+{{ define "main" }}
+<article>
+  <h1>{{ .Title }}</h1>
+  <p class="intro">
+    {{ .Summary }}
+  </p>
+
+  {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+  {{ $dateHuman := .Date | time.Format ":date_long" }}
+  <time class="updated-on" datetime="{{ $dateMachine }}">Last updated on {{ $dateHuman }}.</time>
+
+  {{ .Content }}
+  </article>
+  <nav class="related-articles">
+    <h2>Related articles</h2>
+    <ul>
+    {{ range .Parent.Pages }}
+      {{ if not (eq .RelPermalink $.Page.RelPermalink) }}
+        <li>
+          <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+        </li>
+      {{ end }}
+    {{ end }}
+    </ul>
+  </nav>
+{{ end }}

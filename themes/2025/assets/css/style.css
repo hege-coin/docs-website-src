@@ -1,0 +1,391 @@
+/* https: //www.joshwcomeau.com/css/custom-css-reset/ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        interpolate-size: allow-keywords;
+    }
+}
+
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-wrap: pretty;
+}
+
+/* General */
+
+html {
+    --white: #f8f9fa;
+    --black: #202124;
+    --text-color: light-dark(var(--black), var(--white));
+    --muted-text-color: rgb(from var(--text-color) r g b / 0.8);
+    --bg-color: light-dark(var(--white), var(--black));
+    --link-color: light-dark(#0668c9, #3b90e6);
+    --border-color: rgb(from var(--text-color) r g b / 0.35);
+    --muted-border-color: rgb(from var(--text-color) r g b / 0.15);
+    --hover-color: rgb(from var(--text-color) r g b / 0.08);
+}
+
+/* Fuck you old Safari */
+@supports not (color: light-dark(#fff, #000)) {
+    html {
+        --border-color: #666;
+        --muted-border-color: #666;
+        --link-color: #3b90e6;
+    }
+}
+
+body {
+    font-family: system-ui, sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+a {
+    color: var(--link-color);
+}
+
+a[href^='http']:after {
+    content: '↗';
+    margin-left: 5px;
+    color: rgb(from var(--text-color) r g b / 0.5);
+    /* Removes underline (in some browsers?) */
+    display: inline-block;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Layout */
+
+body {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 1fr 260px minmax(500px, 800px) 1fr;
+    grid-template-rows: 100px 1fr;
+}
+
+header {
+    grid-row: 1;
+    grid-column: 1 / 5;
+    border-bottom: 1px solid var(--muted-border-color);
+    align-content: center;
+    display: grid;
+    grid-template-columns: 1fr 260px minmax(500px, 800px) 1fr;
+}
+
+header .logo {
+    grid-column: 2;
+    padding: 10px;
+    overflow: hidden;
+}
+
+header .logo img {
+    width: 120px;
+    max-height: 30px;
+}
+
+header div {
+    grid-column: 3;
+    align-self: end;
+    justify-self: end;
+    font-size: 0.9rem;
+    color: var(--muted-text-color);
+    padding-right: 15px;
+}
+
+.nav-toggle {
+    display: none;
+}
+
+body>nav {
+    grid-column: 2;
+    padding: 50px 40px 54px 0;
+}
+
+main {
+    grid-column: 3;
+    padding: 40px;
+    border: 1px solid var(--muted-border-color);
+    border-width: 0 1px;
+}
+
+/* Main navigation */
+
+body>nav {
+    font-size: 0.9rem;
+}
+
+body>nav ul {
+    list-style: none;
+    margin-bottom: 25px;
+    padding: 0;
+}
+
+body>nav li {
+    padding: 0;
+}
+
+body>nav h3 {
+    font-size: 1rem;
+}
+
+body>nav a {
+    display: flex;
+    align-items: center;
+    padding: 7px 8px;
+    margin: 4px 0;
+    border-radius: 5px;
+    line-height: 1;
+    font-weight: 600;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+/* Image wrapper */
+body>nav a span {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 23px;
+    height: 23px;
+    margin-right: 5px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--white);
+    overflow: hidden;
+}
+
+body>nav a img {
+    max-height: 14px;
+    max-width: 18px;
+}
+
+body>nav a:hover {
+    background: var(--hover-color);
+}
+
+body>nav a.current {
+    background: rgb(from var(--text-color) r g b / 0.15);
+}
+
+.links {
+    margin-top: 30px;
+}
+
+.links a {
+    font-size: 13px;
+    padding: 4px 5px;
+    margin-left: 3px;
+}
+
+/* Main content */
+
+h1 {
+    margin: 0 0 15px 0;
+    font-size: 2.25rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin: 25px 0 10px;
+}
+
+article h2 {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 3px;
+    margin: 25px 0 15px 0;
+}
+
+p.intro {
+    font-size: 1.25rem;
+    line-height: 1.4;
+    margin-bottom: 20px;
+}
+
+.updated-on {
+    color: var(--muted-text-color);
+    font-size: 1rem;
+}
+
+p {
+    margin: 15px 0;
+}
+
+h2+p {
+    margin-top: 0;
+}
+
+.related-articles {
+    margin-top: 50px;
+}
+
+.related-articles h2 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.related-articles a {
+    margin: 2px 0;
+    display: inline-block;
+}
+
+/* Button-style links */
+.featured-links {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+.featured-links li {
+    display: inline-block;
+    padding: 0;
+    margin: 0 20px 0 0;
+}
+
+.featured-links a {
+    display: block;
+    padding: 13px 17px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    line-height: 1;
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.featured-links a:hover {
+    background: var(--hover-color);
+}
+
+/* Mobile (narrow) view */
+@media screen and (max-width: 920px) {
+
+    body {
+        display: block;
+        height: auto;
+    }
+
+    header {
+        width: auto;
+        padding: 20px 15px;
+        display: flex;
+        gap: 15px;
+    }
+
+    header .logo {
+        padding: 5px 0 0 0;
+        margin: 0;
+        flex-grow: 1;
+    }
+
+    header div {
+        padding: 0;
+    }
+
+    body>nav,
+    main {
+        padding: 15px;
+        width: auto;
+    }
+
+    main {
+        border-width: 1px 0 0 0;
+    }
+
+    /* https://stackoverflow.com/questions/48143381/css-expand-contract-animation-to-show-hide-content */
+    .nav-toggle {
+        display: block;
+        font-size: 1.1rem;
+    }
+
+    .nav-toggle:hover {
+        cursor: pointer;
+    }
+
+    .nav-toggle label {
+        display: block;
+        padding: 15px 0;
+        font-weight: bold;
+    }
+
+    .nav-toggle svg {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        margin-left: 15px;
+        transition: transform 200ms linear;
+    }
+
+    .nav-toggle:has(input:checked)+nav {
+        grid-template-rows: 1fr;
+    }
+
+    .nav-toggle:has(input:checked) svg {
+        transform: rotate(90deg);
+    }
+
+    body>nav {
+        padding: 0 10px;
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 200ms ease-out;
+    }
+
+    body>nav .nav-content {
+        overflow: hidden;
+    }
+}
