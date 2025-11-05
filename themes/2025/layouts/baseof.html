@@ -23,10 +23,8 @@
       <link rel="prefetch" href="{{ .RelPermalink }}">
     {{ end }}
   {{ end }}
-  {{ with resources.Get "css/style.css" }}
-    {{ with . }}
-      <style>{{ .Content | safeCSS }}</style>
-    {{ end }}
+  {{ with resources.Get "css/style.css" | minify }}
+    <style>{{ .Content | safeCSS }}</style>
   {{ end }}
   <script>
     const colorMeta = document.querySelector('meta[name="color-scheme"]');
@@ -95,43 +93,43 @@
       {{ end }}
       <ul class="links">
         <li>
-          <a href="https://www.hegecoin.com">
+          <a href="https://www.hegecoin.com" target="_blank">
             <span><img src="{{ relURL "images/hege-icon.svg" }}" width="14" alt="Hege icon" /></span>
             Website
           </a>
         </li>
         <li>
-          <a href="https://t.me/Hegequarters">
+          <a href="https://t.me/Hegequarters" target="_blank">
             <span><img src="{{ relURL "images/telegram-icon.svg" }}" width="14" alt="Telegram logo" /></span>
             Telegram
           </a>
         </li>
         <li>
-          <a href="https://x.com/HegeCoin/">
+          <a href="https://x.com/HegeCoin/" target="_blank">
             <span><img src="{{ relURL "images/x-icon.svg" }}" width="14" alt="X logo" /></span>
             X
           </a>
         </li>
         <li>
-          <a href="https://www.reddit.com/r/HegeCoin/">
+          <a href="https://www.reddit.com/r/HegeCoin/" target="_blank">
             <span><img src="{{ relURL "images/reddit-icon.svg" }}" width="14" alt="Reddit logo" /></span>
             Reddit
           </a>
         </li>
         <li>
-          <a href="https://www.youtube.com/@HegeCoin">
+          <a href="https://www.youtube.com/@HegeCoin" target="_blank">
             <span><img src="{{ relURL "images/youtube-icon.png" }}" width="14" alt="YouTube logo" /></span>
             YouTube
           </a>
         </li>
         <li>
-          <a href="https://www.tiktok.com/@hegecoinsol">
+          <a href="https://www.tiktok.com/@hegecoinsol" target="_blank">
             <span><img src="{{ relURL "images/tiktok-icon.svg" }}" width="14" alt="TikTok logo" /></span>
             TikTok
           </a>
         </li>
         <li>
-          <a href="https://www.instagram.com/hege.coin">
+          <a href="https://www.instagram.com/hege.coin" target="_blank">
             <span><img src="{{ relURL "images/instagram-icon.svg" }}" width="14" alt="Instagram logo" /></span>
             Instagram
           </a>
