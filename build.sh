@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # Builds the website and applies post processing, storing the final output in
 # `build-output/`.
