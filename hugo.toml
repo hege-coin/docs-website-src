@@ -1,6 +1,6 @@
-baseURL = 'https://hege-coin.github.io/docs-website/'
+baseURL = 'https://docs.hegecoin.com/'
 languageCode = 'en-us'
-title = 'Hegecoin docs'
+title = 'Hege Docs'
 theme = '2025'
 disableHugoGeneratorInject = true
 
